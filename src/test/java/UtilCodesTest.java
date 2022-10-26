@@ -15,8 +15,18 @@ public class UtilCodesTest {
     @Test
     public void convertFirstPageFromPDFToImage() throws IOException {
 
-        File file = new File("/home/ronaldo/Downloads/guia_rapido_merchandising_abr_2022_papo_de_farmacia.pdf");
-        PDDocument document = PDDocument.load(file);
+        PDDocument document = PDDocument.load(new File("/home/ronaldo/Downloads/guia_rapido_merchandising_abr_2022_papo_de_farmacia.pdf"));
+        BufferedImage image = new PDFRenderer(document).renderImageWithDPI(0, 600, ImageType.RGB);
+
+        ImageIO.write(image, "jpg", new File("/home/ronaldo/Desktop/image.jpg"));
+        document.close();
+    }
+
+    @DisplayName("Utilizando a lib 'Apache PDFBox', este método realiza a conversão da primeira página do documento, em uma imagem '.jpg' ")
+    @Test
+    public void getWordsFromPDF() throws IOException {
+
+        PDDocument document = PDDocument.load(new File("/home/ronaldo/Downloads/guia_rapido_merchandising_abr_2022_papo_de_farmacia.pdf"));
         BufferedImage image = new PDFRenderer(document).renderImageWithDPI(0, 600, ImageType.RGB);
 
         ImageIO.write(image, "jpg", new File("/home/ronaldo/Desktop/image.jpg"));
